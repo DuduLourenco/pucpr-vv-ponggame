@@ -1,4 +1,4 @@
-# PongGame
+<h1 align="center">PongGame</h1>
 
 <p align="center">PongGame desenvolvido em Java - Eclipse</p>
 
