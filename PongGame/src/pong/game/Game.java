@@ -1,6 +1,7 @@
 package pong.game;
 
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 
 import pong.input.KeyManager;
@@ -78,6 +79,7 @@ public class Game implements Runnable{
 		
 		g.dispose();
 		bs.show();
+		Toolkit.getDefaultToolkit().sync();
 		
 	}
 

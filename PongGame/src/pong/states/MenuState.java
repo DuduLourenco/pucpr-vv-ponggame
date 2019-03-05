@@ -99,7 +99,7 @@ public class MenuState implements States {
 				StateManager.setState(StateManager.GAME);
 				break;
 		case 1:	
-				StateManager.setState(StateManager.MENU);
+				StateManager.setState(StateManager.HELP);
 				break;
 		case 2:
 				System.exit(0);

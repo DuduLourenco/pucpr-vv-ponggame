@@ -52,7 +52,8 @@ public class GameState implements States {
 		
 		if(KeyManager.speed && xVel<0)
 			xVel = -10;
-
+		else if(!KeyManager.speed && xVel<0)
+			xVel = -4;
 		
 		limits();
 	}
@@ -97,9 +98,7 @@ public class GameState implements States {
 		g.setColor(Color.WHITE);
 		g.fillRect(A.x, A.y, A.width, A.height);
 		g.fillRect(B.x, B.y, B.width, B.height);
-		
-		
-		
+				
 	}
 
 	@Override
