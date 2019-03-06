@@ -17,7 +17,6 @@ public class GameState implements States {
 	private static int xVel=4, yVel=4;
 	private Font fonteScore = new Font("Dialog", Font.BOLD, 32);
 	
-	
 	@Override
 	public void init() {
 		A = new Player(5,(Game.height - 80)/2, 1);
@@ -25,57 +24,16 @@ public class GameState implements States {
 		start();
 	}
 	
-	public void start() {
-		ball.x = (Game.width/2-5);
-		ball.y = (Game.height/2-5);
-		
-		Random r = new Random();
-		xVel = (r.nextInt(2)==0) ? 4 : -4;
-		yVel = (r.nextInt(2)==0) ? 4 : -4;
-	}
-
 	@Override
 	public void update() {
 		ball.x += xVel;
 		ball.y += yVel;
 		
-
-		
-		if(KeyManager.w)
-			A.move(1);
-		if(KeyManager.s)
-			A.move(0);
-		if(KeyManager.up)
-			B.move(1);
-		if(KeyManager.down)
-			B.move(0);
-		
-		if(KeyManager.speed && xVel<0)
-			xVel = -10;
-		else if(!KeyManager.speed && xVel<0)
-			xVel = -4;
+		checkKeyPressed(2);
 		
 		limits();
 	}
-
-	private void limits() {
-		if(ball.x < 0) {
-			start();
-			B.incScore();
-		}if(ball.x > (Game.width-5)) {
-			start();
-			A.incScore();
-		}else if(ball.y < 80) {
-			yVel = 4;
-		}else if(ball.y > (Game.height - 15)){
-			yVel = -4;
-		}else if(A.intersects(ball)){
-			xVel = 4;
-		}else if(B.intersects(ball)) {
-			xVel = -4;
-		}
-	}
-
+	
 	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.BLACK);
@@ -100,10 +58,51 @@ public class GameState implements States {
 		g.fillRect(B.x, B.y, B.width, B.height);
 				
 	}
-
+	
 	@Override
-	public void keyPressed(int cod) {}
+	public void checkKeyPressed(int cod) {
+		
+		if(KeyManager.w)
+			A.move(1);
+		if(KeyManager.s)
+			A.move(0);
+		if(KeyManager.up)
+			B.move(1);
+		if(KeyManager.down)
+			B.move(0);
+		
+		if(KeyManager.speed && xVel<0)
+			xVel = -10;
+		else if(!KeyManager.speed && xVel<0)
+			xVel = -4;
+		if(KeyManager.esc)
+			StateManager.setState(StateManager.MENU);
+	}
+	
+	public void start() {
+		ball.x = (Game.width/2-5);
+		ball.y = (Game.height/2-5);
+		
+		Random r = new Random();
+		xVel = (r.nextInt(2)==0) ? 4 : -4;
+		yVel = (r.nextInt(2)==0) ? 4 : -4;
+	}
 
-	@Override
-	public void keyReleased(int cod) {}
+	private void limits() {
+		if(ball.x < 0) {
+			start();
+			B.incScore();
+		}if(ball.x > (Game.width-5)) {
+			start();
+			A.incScore();
+		}else if(ball.y < 80) {
+			yVel = 4;
+		}else if(ball.y > (Game.height - 15)){
+			yVel = -4;
+		}else if(A.intersects(ball)){
+			xVel = 4;
+		}else if(B.intersects(ball)) {
+			xVel = -4;
+		}
+	}
 }

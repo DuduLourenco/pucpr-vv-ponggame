@@ -3,10 +3,12 @@ package pong.input;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import pong.states.StateManager;
+
 public class KeyManager implements KeyListener {
 
 	private boolean[] keys = new boolean[256];
-	public static boolean w, s, up, down, speed;
+	public static boolean w, s, up, down, speed, enter, f, esc;
 	
 	public void update() {
 		w = keys[KeyEvent.VK_W];
@@ -14,6 +16,9 @@ public class KeyManager implements KeyListener {
 		up = keys[KeyEvent.VK_UP];
 		down = keys[KeyEvent.VK_DOWN];
 		speed = keys[KeyEvent.VK_END];
+		enter = keys[KeyEvent.VK_ENTER];
+		f = keys[KeyEvent.VK_F];
+		esc = keys[KeyEvent.VK_ESCAPE];
 	}
 	
 	@Override
@@ -22,6 +27,8 @@ public class KeyManager implements KeyListener {
 			return;
 		
 		keys[e.getKeyCode()] = true;
+		
+		StateManager.getState().checkKeyPressed(e.getKeyCode());
 	}
 	
 	@Override
@@ -30,7 +37,6 @@ public class KeyManager implements KeyListener {
 			return;
 		
 		keys[e.getKeyCode()] = false;
-		
 	}
 		
 	@Override

@@ -59,12 +59,9 @@ public class HelpState implements States{
 	}
 
 	@Override
-	public void keyPressed(int cod) {
+	public void checkKeyPressed(int cod) {
 		StateManager.setState(StateManager.MENU);
 	}
-
-	@Override
-	public void keyReleased(int cod) {}
 	
 
 }

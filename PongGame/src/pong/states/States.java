@@ -9,7 +9,5 @@ public interface States {
 	void init();
 	void update();
 	void render(Graphics g);
-	void keyPressed(int cod);
-	void keyReleased(int cod);
-	
+	void checkKeyPressed(int cod);
 }

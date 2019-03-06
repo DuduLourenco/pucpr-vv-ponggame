@@ -30,16 +30,6 @@ public class MenuState implements States {
 		ball.y+=yVel;
 		
 		limits();
-
-	}
-
-	private void limits() {
-		if(ball.x > (Game.width-15) || ball.x < 0) {
-			xVel = xVel * (-1);;
-		}
-		if(ball.y > (Game.height -15) || ball.y < 0) {
-			yVel = yVel * (-1);
-		}
 		
 	}
 
@@ -66,31 +56,16 @@ public class MenuState implements States {
 			
 			g.drawString(options[i], Game.width/2 - (g.getFontMetrics().stringWidth(options[i])/2), Game.height * 3/5 + (i * (g.getFontMetrics(fontOptions).getHeight()+5)));
 		}
-
-
 	}
-
-	@Override
-	public void keyPressed(int cod) {
-		
-		
-		switch(cod) {
-			case States.upArrow: 
-									if(choice > 0 )
-										choice--;
-									break;
-			case States.leftArrow: 	break;
-			case States.rightArrow: break;
-			case States.downArrow: 
-									if(choice < (options.length-1))
-										choice++;
-									break;
-			case KeyEvent.VK_ENTER:
-									select();break;
-			default:
-									break;
-		
+	
+	private void limits() {
+		if(ball.x > (Game.width-15) || ball.x < 0) {
+			xVel = xVel * (-1);;
 		}
+		if(ball.y > (Game.height -15) || ball.y < 0) {
+			yVel = yVel * (-1);
+		}
+		
 	}
 
 	private void select() {
@@ -102,18 +77,35 @@ public class MenuState implements States {
 				StateManager.setState(StateManager.HELP);
 				break;
 		case 2:
-				System.exit(0);
+				Game.stopGame(0);
 				break;
 		default:
 				break;
 		}
 		
 	}
-
-	@Override
-	public void keyReleased(int cod) {
+	
+	public void checkKeyPressed(int cod) {
 		
+		switch(cod) {
+		case States.upArrow: 
+								if(choice > 0 )
+									choice--;
+								break;
+		case States.leftArrow: 	break;
+		case States.rightArrow: break;
+		case States.downArrow: 
+								if(choice < (options.length-1))
+									choice++;
+								break;
+		case KeyEvent.VK_ENTER:
+								select();break;
+		case KeyEvent.VK_F:
+								StateManager.setState(StateManager.FPS);
+								break;
+		default:
+								break;
 
+		}
 	}
-
 }

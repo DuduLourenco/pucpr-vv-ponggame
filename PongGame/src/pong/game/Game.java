@@ -13,7 +13,7 @@ public class Game implements Runnable{
 	
 	public static final int width = 800, height = 500;
 	private Thread t;
-	private boolean running = false;
+	private static boolean running = false;
 	private Tela tela;
 	
 	private StateManager sm;
@@ -21,11 +21,11 @@ public class Game implements Runnable{
 	
 	public Game() {
 		tela = new Tela("Pong Game by Arthur Bockmann Grossi" ,width, height);
+		
 		sm = new StateManager();
 		km = new KeyManager();
-		tela.setKeyListener(sm);
 		tela.setKeyListener(km);
-		StateManager.setState(1);
+		StateManager.setState(StateManager.MENU);
 	}
 	
 	
@@ -56,9 +56,7 @@ public class Game implements Runnable{
 		
 	}
 	
-	private void init() {
-		
-	}
+	private void init() {}
 	
 	private void update() {
 		sm.update();
@@ -87,9 +85,8 @@ public class Game implements Runnable{
 		if(t!=null) return;
 
 		t = new Thread(this);
-		this.running = true;
+		Game.running = true;
 		t.start();
-		
 	}
 	
 	public synchronized void stop() {
@@ -100,9 +97,13 @@ public class Game implements Runnable{
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}finally {
-			this.running = false;
+			Game.running = false;
 		}
 		
 	}
 
+	public static void stopGame(int code) {
+		Game.running = false;
+		System.exit(code);
+	}
 }
