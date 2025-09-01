@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ck">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/ck.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
